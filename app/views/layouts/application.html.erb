@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class=​'​<%= controller.controller_name %>​'>
+<body class=​"<%= controller.controller_name %>​">
   <div id="banner">
   <%#= image_tag("logo.png")  %>
   <%= @page_title || "Kaizoku oni ore wa naru!" %>
@@ -20,12 +20,22 @@
           <% end %>
         <% end %>
       </div>
+
       <ul>
         <li><a href="http://...."></a>Home</li>
         <li><a href="http://..../faq"></a>FAQ</li>
         <li><a href="http://..../news"></a>News</li>
         <li><a href="http://..../contact"></a>Contact Us</li>
       </ul>
+
+      <% if session[:user_id] %>
+        <ul>
+          <li><%= link_to 'Orders', orders_path %></li>
+          <li><%= link_to 'Products', products_path %></li>
+          <li><%= link_to 'Users', orders_path %></li>
+        </ul>   
+        <%= button_to 'Logout', logout_path, method: :delete %>
+      <% end %>
     </div>
     <div id="main">
       <%= yield %>
